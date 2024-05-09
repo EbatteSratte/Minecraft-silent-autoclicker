@@ -11,10 +11,10 @@ type = config.get("main", "type")
 x = int(config.get("main", "xCoord"))
 y = int(config.get("main", "yCoord"))
 delay = float(config.get("main", "delay"))
+WindowName = config.get("main", "windowName")
 
-
-def click(x, y, type):
-    hWnd = win32gui.FindWindow(None, config.get("main", "windowName"))
+def click(x, y, type, WindowName):
+    hWnd = win32gui.FindWindow(None, WindowName)
     lParam = win32api.MAKELONG(x, y)
     if (type == "right"):
         win32api.SendMessage(hWnd, win32con.WM_RBUTTONDOWN, win32con.MK_RBUTTON, lParam)
@@ -29,5 +29,5 @@ def click(x, y, type):
 
 
 while True:
-    click(x, y, type)
+    click(x, y, type, WindowName)
     time.sleep(delay)
