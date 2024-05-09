@@ -7,6 +7,10 @@ from configparser import ConfigParser
 
 config = ConfigParser()
 config.read("config.ini")
+type = config.get("main", "type")
+x = int(config.get("main", "xCoord"))
+y = int(config.get("main", "yCoord"))
+delay = float(config.get("main", "delay"))
 
 
 def click(x, y, type):
@@ -18,9 +22,12 @@ def click(x, y, type):
     elif (type == "left"):
         win32api.SendMessage(hWnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lParam)
         win32api.SendMessage(hWnd, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, lParam)
+    else:
+        print("Wrong mouse button(type). Use: left, right")
+        exit()
     print(f"Clicked! Time: " + str(datetime.now()).split(" ")[1])
 
 
 while True:
-    click(int(config.get("main", "xCoord")), int(config.get("main", "yCoord")), config.get("main", "type"))
-    time.sleep(int(config.get("main", "delay")))
+    click(x, y, type)
+    time.sleep(delay)
