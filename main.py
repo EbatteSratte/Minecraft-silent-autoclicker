@@ -13,7 +13,8 @@ y = int(config.get("main", "yCoord"))
 delay = float(config.get("main", "delay"))
 WindowName = config.get("main", "windowName")
 
-def click(x, y, type, WindowName):
+
+def click():
     hWnd = win32gui.FindWindow(None, WindowName)
     lParam = win32api.MAKELONG(x, y)
     if (type == "right"):
@@ -29,5 +30,5 @@ def click(x, y, type, WindowName):
 
 
 while True:
-    click(x, y, type, WindowName)
+    click()
     time.sleep(delay)
